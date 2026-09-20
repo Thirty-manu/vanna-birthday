@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Yovanna's Rainbow Birthday</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SVG SPRITE SHEET (hidden, reused everywhere via <use>) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+
+  <!-- hand-drawn wobble filter -->
+  <filter id="sketchy" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.015 0.035" numOctaves="2" seed="7" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="sketchy2" x="-20%" y="-20%" width="140%" height="140%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.04" numOctaves="2" seed="42" result="noise2"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise2" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+
+  <!-- ===== RAINBOW A: full wide arc, 7 crayon bands ===== -->
+  <symbol id="rainbowA" viewBox="0 0 220 120">
+    <g fill="none" stroke-linecap="round" filter="url(#sketchy)">
+      <path d="M8,112 C 8,40 60,10 110,10 C 160,10 212,40 212,112" stroke="#F2666B" stroke-width="9"/>
+      <path d="M18,112 C 18,48 65,19 110,19 C 155,19 202,48 202,112" stroke="#FFA94D" stroke-width="9"/>
+      <path d="M28,112 C 28,56 70,28 110,28 C 150,28 192,56 192,112" stroke="#FFDD57" stroke-width="9"/>
+      <path d="M38,112 C 38,64 75,37 110,37 C 145,37 182,64 182,112" stroke="#8CE99A" stroke-width="9"/>
+      <path d="M48,112 C 48,72 80,46 110,46 C 140,46 172,72 172,112" stroke="#74C0FC" stroke-width="9"/>
+      <path d="M58,112 C 58,80 85,55 110,55 C 135,55 162,80 162,112" stroke="#B197FC" stroke-width="9"/>
+      <path d="M68,112 C 68,88 90,64 110,64 C 130,64 152,88 152,112" stroke="#F783AC" stroke-width="9"/>
+    </g>
+  </symbol>
+
+  <!-- ===== RAINBOW B: compact / steep arc ===== -->
+  <symbol id="rainbowB" viewBox="0 0 160 110">
+    <g fill="none" stroke-linecap="round" filter="url(#sketchy2)">
+      <path d="M6,105 C 4,30 55,6 80,6 C 105,6 156,30 154,105" stroke="#F2666B" stroke-width="8"/>
+      <path d="M16,105 C 14,38 58,15 80,15 C 102,15 146,38 144,105" stroke="#FFA94D" stroke-width="8"/>
+      <path d="M26,105 C 24,46 61,24 80,24 C 99,24 136,46 134,105" stroke="#FFDD57" stroke-width="8"/>
+      <path d="M36,105 C 34,54 64,33 80,33 C 96,33 126,54 124,105" stroke="#8CE99A" stroke-width="8"/>
+      <path d="M46,105 C 44,62 67,42 80,42 C 93,42 116,62 114,105" stroke="#74C0FC" stroke-width="8"/>
+      <path d="M56,105 C 54,70 70,51 80,51 C 90,51 106,70 104,105" stroke="#B197FC" stroke-width="8"/>
+    </g>
+  </symbol>
+
+  <!-- ===== RAINBOW C: small doodle rainbow (for hidden discoveries) ===== -->
+  <symbol id="rainbowC" viewBox="0 0 100 60">
+    <g fill="none" stroke-linecap="round" filter="url(#sketchy)">
+      <path d="M4,56 C 4,20 35,4 50,4 C 65,4 96,20 96,56" stroke="#F2666B" stroke-width="6"/>
+      <path d="M13,56 C 13,26 38,11 50,11 C 62,11 87,26 87,56" stroke="#FFDD57" stroke-width="6"/>
+      <path d="M22,56 C 22,32 41,18 50,18 C 59,18 78,32 78,56" stroke="#74C0FC" stroke-width="6"/>
+      <path d="M31,56 C 31,38 44,25 50,25 C 56,25 69,38 69,56" stroke="#F783AC" stroke-width="6"/>
+    </g>
+  </symbol>
+
+  <!-- cloud -->
+  <symbol id="cloudDoodle" viewBox="0 0 120 60">
+    <path d="M18,46 C4,44 4,24 20,22 C22,8 46,4 54,16 C68,6 90,12 90,26 C104,26 106,46 92,48 C90,48 22,48 18,46 Z"
+      fill="#FFFFFF" stroke="#C9DCEA" stroke-width="3" filter="url(#sketchy)"/>
+  </symbol>
+
+  <!-- sun -->
+  <symbol id="sunDoodle" viewBox="0 0 100 100">
+    <g filter="url(#sketchy)">
+      <circle cx="50" cy="50" r="24" fill="#FFE066" stroke="#FFB74D" stroke-width="3.5"/>
+      <g stroke="#FFB74D" stroke-width="4" stroke-linecap="round">
+        <path d="M50,10 L50,2"/><path d="M50,90 L50,98"/>
+        <path d="M10,50 L2,50"/><path d="M90,50 L98,50"/>
+        <path d="M22,22 L16,16"/><path d="M78,78 L84,84"/>
+        <path d="M78,22 L84,16"/><path d="M22,78 L16,84"/>
+      </g>
+      <circle cx="42" cy="46" r="2.5" fill="#8A5A2B"/>
+      <circle cx="58" cy="46" r="2.5" fill="#8A5A2B"/>
+      <path d="M40,58 Q50,66 60,58" fill="none" stroke="#8A5A2B" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+  </symbol>
+
+  <!-- star -->
+  <symbol id="starDoodle" viewBox="0 0 40 40">
+    <path d="M20,2 L24,15 L38,15 L26,23 L31,37 L20,28 L9,37 L14,23 L2,15 L16,15 Z"
+      fill="#FFE066" stroke="#F2A93B" stroke-width="2" filter="url(#sketchy)"/>
+  </symbol>
+
+  <!-- sparkle (small 4-point twinkle) -->
+  <symbol id="sparkleDoodle" viewBox="0 0 30 30">
+    <path d="M15,1 C16,10 20,14 29,15 C20,16 16,20 15,29 C14,20 10,16 1,15 C10,14 14,10 15,1 Z"
+      fill="#FFF6D6" stroke="#FFD86B" stroke-width="1.5" filter="url(#sketchy)"/>
+  </symbol>
+
+  <!-- flower -->
+  <symbol id="flowerDoodle" viewBox="0 0 100 100">
+    <g filter="url(#sketchy)">
+      <g fill="#F783AC" stroke="#E4638A" stroke-width="2">
+        <ellipse cx="50" cy="28" rx="15" ry="18"/>
+        <ellipse cx="50" cy="72" rx="15" ry="18"/>
+        <ellipse cx="28" cy="50" rx="18" ry="15"/>
+        <ellipse cx="72" cy="50" rx="18" ry="15"/>
+      </g>
+      <circle cx="50" cy="50" r="14" fill="#FFE066" stroke="#F2A93B" stroke-width="2.5"/>
+    </g>
+  </symbol>
+
+  <!-- butterfly -->
+  <symbol id="butterflyDoodle" viewBox="0 0 100 80">
+    <g filter="url(#sketchy)">
+      <path d="M48,40 C30,10 4,14 6,34 C8,50 30,50 48,42" fill="#B197FC" stroke="#8C6FE0" stroke-width="2.5"/>
+      <path d="M52,40 C70,10 96,14 94,34 C92,50 70,50 52,42" fill="#74C0FC" stroke="#4DA3EE" stroke-width="2.5"/>
+      <path d="M48,44 C34,60 14,60 16,72 C18,80 36,74 48,58" fill="#F783AC" stroke="#E4638A" stroke-width="2.5"/>
+      <path d="M52,44 C66,60 86,60 84,72 C82,80 64,74 52,58" fill="#FFB74D" stroke="#F2954D" stroke-width="2.5"/>
+      <line x1="50" y1="20" x2="50" y2="62" stroke="#5B4636" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="18" r="4" fill="#5B4636"/>
+    </g>
+  </symbol>
+
+  <!-- unicorn head (friendly, simple) -->
+  <symbol id="unicornDoodle" viewBox="0 0 120 120">
+    <g filter="url(#sketchy)">
+      <path d="M60,10 L68,38 L52,38 Z" fill="#FFE066" stroke="#F2A93B" stroke-width="2.5"/>
+      <path d="M40,50 C40,25 80,25 80,50 C86,58 84,78 74,88 C68,96 52,96 46,88 C36,78 34,58 40,50 Z"
+        fill="#FFFFFF" stroke="#D8B8F5" stroke-width="3"/>
+      <path d="M35,40 C25,30 20,40 30,48 C35,52 42,50 42,50" fill="#F783AC" stroke="#E4638A" stroke-width="2"/>
+      <path d="M42,32 C36,20 44,16 50,26" fill="#74C0FC" stroke="#4DA3EE" stroke-width="2"/>
+      <path d="M55,30 C52,16 62,14 64,26" fill="#B197FC" stroke="#8C6FE0" stroke-width="2"/>
+      <circle cx="56" cy="62" r="3.5" fill="#5B4636"/>
+      <circle cx="72" cy="62" r="3.5" fill="#5B4636"/>
+      <path d="M58,76 Q65,82 72,76" fill="none" stroke="#5B4636" stroke-width="2.5" stroke-linecap="round"/>
+      <ellipse cx="46" cy="70" rx="5" ry="3.5" fill="#F9AFC0" opacity="0.8"/>
+      <ellipse cx="82" cy="70" rx="5" ry="3.5" fill="#F9AFC0" opacity="0.8"/>
+    </g>
+  </symbol>
+
+  <!-- bunny head -->
+  <symbol id="bunnyDoodle" viewBox="0 0 120 120">
+    <g filter="url(#sketchy)">
+      <path d="M42,50 C36,20 26,4 34,2 C44,0 50,26 52,46" fill="#FFFFFF" stroke="#E7C7A9" stroke-width="3"/>
+      <path d="M70,50 C74,20 84,4 76,2 C66,0 62,26 60,46" fill="#FFFFFF" stroke="#E7C7A9" stroke-width="3"/>
+      <path d="M45,44 C42,26 34,16 38,14 C46,12 50,30 52,44" fill="#F9AFC0"/>
+      <path d="M67,44 C70,26 78,16 74,14 C66,12 62,30 60,44" fill="#F9AFC0"/>
+      <ellipse cx="56" cy="72" rx="30" ry="26" fill="#FFFFFF" stroke="#E7C7A9" stroke-width="3"/>
+      <circle cx="46" cy="68" r="3.5" fill="#5B4636"/>
+      <circle cx="66" cy="68" r="3.5" fill="#5B4636"/>
+      <ellipse cx="56" cy="78" rx="4" ry="3" fill="#F2A93B"/>
+      <path d="M56,81 Q50,88 42,84 M56,81 Q62,88 70,84" fill="none" stroke="#5B4636" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </symbol>
+
+</defs>
+</svg>
+
+<!-- ============ OPENING SCREEN ============ -->
+<section id="opening" class="screen opening-screen">
+  <div class="sky-deco" aria-hidden="true">
+    <svg class="deco sun-deco" viewBox="0 0 100 100"><use href="#sunDoodle"/></svg>
+    <svg class="deco cloud-deco c1" viewBox="0 0 120 60"><use href="#cloudDoodle"/></svg>
+    <svg class="deco cloud-deco c2" viewBox="0 0 120 60"><use href="#cloudDoodle"/></svg>
+    <svg class="deco star-deco s1" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco star-deco s2" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco star-deco s3" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco flower-deco f1" viewBox="0 0 100 100"><use href="#flowerDoodle"/></svg>
+    <svg class="deco flower-deco f2" viewBox="0 0 100 100"><use href="#flowerDoodle"/></svg>
+    <svg class="deco butterfly-deco b1 floaty" viewBox="0 0 100 80"><use href="#butterflyDoodle"/></svg>
+    <svg class="deco butterfly-deco b2 floaty" viewBox="0 0 100 80"><use href="#butterflyDoodle"/></svg>
+    <svg class="deco rainbow-deco r1" viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+    <svg class="deco rainbow-deco r2" viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+    <div class="bubble ob1"></div>
+    <div class="bubble ob2"></div>
+    <div class="bubble ob3"></div>
+    <div class="bubble ob4"></div>
+  </div>
+
+  <div class="opening-card">
+    <h1 class="title-hand rainbow-text">Hi Yovanna <span class="rainbow-emoji">🌈</span></h1>
+    <p class="opening-sub">Come and see something magical&hellip;</p>
+    <button id="letsGoBtn" class="btn-crayon btn-big">Let's go! ✨</button>
+  </div>
+</section>
+
+<!-- ============ MAGICAL WORLD ============ -->
+<main id="world" class="hidden">
+
+  <div id="worldDust" class="ambient-dust" aria-hidden="true"></div>
+
+  <!-- floating music control -->
+  <div id="musicCard" class="music-card hidden">
+    <button id="musicBtn" class="music-btn" aria-label="Play birthday song">
+      <span id="musicIcon">🎵</span>
+      <span id="musicLabel">Play song</span>
+    </button>
+  </div>
+
+  <!-- discovery counter -->
+  <div id="discoveryTracker" class="discovery-tracker">
+    <span class="tracker-rainbow">🌈</span>
+    <span id="discoveryCount">0</span>/<span id="discoveryTotal">5</span> found
+  </div>
+
+  <audio id="birthdayAudio" preload="auto" loop>
+    <source src="assets/audio/birthday-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ===== SECTION 1: Birthday Message ===== -->
+  <section class="page page-message">
+    <svg class="deco corner-rainbow tl" viewBox="0 0 220 120"><use href="#rainbowA"/></svg>
+    <svg class="deco sparkle sp1" viewBox="0 0 30 30"><use href="#sparkleDoodle"/></svg>
+    <svg class="deco sparkle sp2" viewBox="0 0 30 30"><use href="#sparkleDoodle"/></svg>
+
+    <div class="paper-card center-card">
+      <h2 class="title-hand big-title">Happy 4th Birthday,<br>Yovanna Neema Mandelah! 🎂🌈</h2>
+      <p class="warm-line">A special birthday surprise from Kemboi ❤️</p>
+      <button class="hidden-rainbow corner-br" data-id="1" aria-label="hidden rainbow">
+        <svg viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: Yovanna's Rainbow ===== -->
+  <section class="page page-rainbow" id="rainbowSection">
+    <svg class="deco cloud-deco fc1 drift" viewBox="0 0 120 60"><use href="#cloudDoodle"/></svg>
+    <svg class="deco cloud-deco fc2 drift-slow" viewBox="0 0 120 60"><use href="#cloudDoodle"/></svg>
+
+    <div class="paper-card center-card">
+      <h2 class="title-hand section-title">Yovanna's Rainbow 🌈</h2>
+      <p class="warm-line">Look! A rainbow just for you! 🌈</p>
+      <svg class="hero-rainbow wiggle" viewBox="0 0 220 120"><use href="#rainbowA"/></svg>
+      <div class="mini-bubbles" aria-hidden="true">
+        <div class="bubble mb1"></div><div class="bubble mb2"></div><div class="bubble mb3"></div>
+      </div>
+      <button class="hidden-rainbow corner-bl" data-id="2" aria-label="hidden rainbow">
+        <svg viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: Wish Garden ===== -->
+  <section class="page page-garden">
+    <svg class="deco rainbow-deco corner-br" viewBox="0 0 160 110"><use href="#rainbowB"/></svg>
+
+    <div class="paper-card center-card">
+      <h2 class="title-hand section-title">Make a Wish, Yovanna! 🌸</h2>
+      <p class="warm-line">Tap a flower to make a wish bloom!</p>
+
+      <div class="garden">
+        <button class="flower-btn flower-pink" data-wish="0">
+          <svg viewBox="0 0 100 100"><use href="#flowerDoodle"/></svg>
+          <span class="bloom-burst" aria-hidden="true"></span>
+        </button>
+        <button class="flower-btn flower-purple" data-wish="1">
+          <svg viewBox="0 0 100 100"><use href="#flowerDoodle"/></svg>
+          <span class="bloom-burst" aria-hidden="true"></span>
+        </button>
+        <button class="flower-btn flower-gold" data-wish="2">
+          <svg viewBox="0 0 100 100"><use href="#flowerDoodle"/></svg>
+          <span class="bloom-burst" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="grass" aria-hidden="true"></div>
+      <svg class="deco butterfly-deco garden-b floaty" viewBox="0 0 100 80"><use href="#butterflyDoodle"/></svg>
+      <p id="wishMessage" class="wish-message" aria-live="polite">&nbsp;</p>
+      <button class="hidden-rainbow corner-br" data-id="3" aria-label="hidden rainbow">
+        <svg viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: Bubble Time ===== -->
+  <section class="page page-bubbles">
+    <div class="paper-card center-card">
+      <h2 class="title-hand section-title">Bubble Time! 🫧</h2>
+      <p class="warm-line">Tap the wand, then pop the bubbles!</p>
+
+      <button id="wandBtn" class="wand-btn" aria-label="Wave the bubble wand">
+        <svg viewBox="0 0 100 100" width="70" height="70">
+          <g filter="url(#sketchy)">
+            <line x1="20" y1="80" x2="55" y2="45" stroke="#C99A5B" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="65" cy="32" r="20" fill="none" stroke="#F783AC" stroke-width="5"/>
+            <circle cx="65" cy="32" r="12" fill="#CDEBFA" opacity="0.5"/>
+          </g>
+        </svg>
+        <span>Wave the wand!</span>
+      </button>
+
+      <div id="bubbleField" class="bubble-field">
+        <div class="bubble idle-bubble ib1" aria-hidden="true"></div>
+        <div class="bubble idle-bubble ib2" aria-hidden="true"></div>
+        <div class="bubble idle-bubble ib3" aria-hidden="true"></div>
+        <div class="bubble idle-bubble ib4" aria-hidden="true"></div>
+        <div class="bubble idle-bubble ib5" aria-hidden="true"></div>
+      </div>
+      <p id="bubbleMessage" class="wish-message" aria-live="polite">&nbsp;</p>
+      <button class="hidden-rainbow corner-bl" data-id="4" aria-label="hidden rainbow">
+        <svg viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: Birthday Friends ===== -->
+  <section class="page page-friends">
+    <svg class="deco star-deco fs1" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco star-deco fs2" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+
+    <div class="paper-card center-card">
+      <h2 class="title-hand section-title">Choose a Birthday Friend 🦄</h2>
+      <p class="warm-line">Tap a friend to say hello!</p>
+
+      <div class="friends-grid">
+        <button class="friend-card" data-friend="butterfly">
+          <svg viewBox="0 0 100 80"><use href="#butterflyDoodle"/></svg>
+          <span>Butterfly 🦋</span>
+        </button>
+        <button class="friend-card" data-friend="unicorn">
+          <svg viewBox="0 0 120 120"><use href="#unicornDoodle"/></svg>
+          <span>Unicorn 🦄</span>
+        </button>
+        <button class="friend-card" data-friend="bunny">
+          <svg viewBox="0 0 120 120"><use href="#bunnyDoodle"/></svg>
+          <span>Bunny 🐰</span>
+        </button>
+      </div>
+      <p id="friendMessage" class="wish-message" aria-live="polite">&nbsp;</p>
+      <button class="hidden-rainbow corner-br" data-id="5" aria-label="hidden rainbow">
+        <svg viewBox="0 0 100 60"><use href="#rainbowC"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6: Final Surprise button ===== -->
+  <section class="page page-cta">
+    <svg class="deco rainbow-deco cta-rainbow" viewBox="0 0 220 120"><use href="#rainbowA"/></svg>
+    <div class="paper-card center-card">
+      <p id="allFoundMsg" class="warm-line found-msg hidden">Yovanna found all the rainbows! 🌈✨</p>
+      <button id="finalSurpriseBtn" class="btn-crayon btn-big">One more little surprise... ✨</button>
+    </div>
+  </section>
+</main>
+
+<!-- ============ FINALE ============ -->
+<section id="finale" class="screen finale-screen hidden">
+  <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+  <div id="finaleDust" class="ambient-dust" aria-hidden="true"></div>
+  <div class="sky-deco" aria-hidden="true">
+    <svg class="deco star-deco fs1" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco star-deco fs2" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <svg class="deco star-deco fs3" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <div class="bubble fbub1"></div>
+    <div class="bubble fbub2"></div>
+    <div class="bubble fbub3"></div>
+  </div>
+
+  <div class="paper-card center-card finale-card">
+    <p class="eyebrow-hand">A beautiful birthday moment</p>
+    <h2 class="title-hand giant-title rainbow-text">YOVANNA IS 4! 🎉🌈</h2>
+    <svg class="hero-rainbow wiggle" viewBox="0 0 220 120"><use href="#rainbowA"/></svg>
+    <h3 class="title-hand section-title">Happy Birthday, Yovanna!</h3>
+    <p class="full-name">Yovanna Neema Mandelah</p>
+    <p class="poem-line">
+      Keep smiling.<br>
+      Keep laughing.<br>
+      Keep dreaming.<br>
+      And keep making beautiful rainbows. 🌈
+    </p>
+    <p class="signature-note">Made with love for you by your Uncle Kemboi <span class="heart">&hearts;</span></p>
+  </div>
+
+  <!-- ===== FINAL MEMORY SECTION ===== -->
+  <div class="paper-card center-card memory-card">
+    <h2 class="title-hand section-title">Yovanna's Little Rainbow 🌈</h2>
+    <svg class="hero-rainbow small-hero" viewBox="0 0 160 110"><use href="#rainbowB"/></svg>
+    <svg class="deco star-deco memory-star" viewBox="0 0 40 40"><use href="#starDoodle"/></svg>
+    <p class="warm-line">Happy 4th Birthday, Yovanna!</p>
+    <p class="signature-note">With love, your Uncle Kemboi <span class="heart">&hearts;</span></p>
+  </div>
+</section>
+
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
